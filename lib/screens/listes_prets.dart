@@ -1,4 +1,5 @@
 import 'package:firebase/screens/prets_encours.dart';
+import 'package:firebase/screens/prets_termines.dart';
 import 'package:flutter/material.dart';
 
 class ListesPrets extends StatefulWidget {
@@ -30,7 +31,7 @@ class _ListesPretsState extends State<ListesPrets> {
         body: const TabBarView(
           children: [
              PretsEncours(),
-            Text("Terminés")
+             PretsTermines()
           ],
         ),
       ),

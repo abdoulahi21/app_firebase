@@ -30,6 +30,8 @@ class _PretsEncoursState extends State<PretsEncours> {
             snapshot.data!.docs.forEach((element) {
               prets.add(element);
             });
+            //je veux verifier si le pret est en cours
+            prets.removeWhere((element) => element['etat']!='en cours');
              return Center(
                child: ListView.builder(
                     itemCount: prets.length,
@@ -41,8 +43,8 @@ class _PretsEncoursState extends State<PretsEncours> {
                       final date=DateFormat.yMd().add_jm().format(timestamp.toDate());
                      return  Card(
                        child:  ListTile(
-                         title: Text('$nom'),
-                         subtitle: Text('$produit, $date'),
+                         title: Text('$nom , $date'),
+                         subtitle: Text('$produit'),
                          trailing: Icon(Icons.edit),
                        ),
                      );

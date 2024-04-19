@@ -16,6 +16,7 @@ class _AddPretsPageState extends State<AddPretsPage> {
   final clientNameController= TextEditingController();
   final produitNameController= TextEditingController();
   DateTime selectedDate = DateTime.now();
+  final etatController= 'en cours';
   @override
   void dispose() {
     clientNameController.dispose();
@@ -118,7 +119,7 @@ class _AddPretsPageState extends State<AddPretsPage> {
                            'nom': clientName,
                            'produit': produitName,
                            'date': selectedDate,
-
+                           'etat': etatController
                            });
                          }
                          clientNameController.clear();
