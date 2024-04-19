@@ -26,6 +26,11 @@ class _ControllePageState extends State<ControllePage> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.deepPurpleAccent,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
           title: [
             Text('Accueil'),
             Text('Gestions des prets'),

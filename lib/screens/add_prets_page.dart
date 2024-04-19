@@ -15,6 +15,7 @@ class _AddPretsPageState extends State<AddPretsPage> {
   final _formKey = GlobalKey<FormState>();
   final clientNameController= TextEditingController();
   final produitNameController= TextEditingController();
+  final prixController= TextEditingController();
   DateTime selectedDate = DateTime.now();
   final etatController= 'en cours';
   @override
@@ -70,66 +71,100 @@ class _AddPretsPageState extends State<AddPretsPage> {
                 });
               },
             ),
-            Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  hintStyle: TextStyle(color: Colors.grey),
-                  labelStyle:TextStyle(fontSize: 23),
-                  labelText: "Nom Produits",
-                  hintText: "Nom du produits",
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-                controller: produitNameController,
-              ),
-            ),
             Row(
               children: [
-                SizedBox(
-                  // width: double.infinity,
-                  child: ElevatedButton(
-                    style: const ButtonStyle(
-                        backgroundColor:MaterialStatePropertyAll(Colors.green),
-                    ),
-                    onPressed:(){
-
-                      },
-                    child: Container(child: Icon(Icons.add,color: Colors.white,),)
-                    ),
-                    ),
-                SizedBox(
-                 // width: double.infinity,
-                  child: ElevatedButton(
-                    style: const ButtonStyle(
-                       // backgroundColor:MaterialStatePropertyAll(Colors.blue)
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 20, right: 10),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        hintStyle: TextStyle(color: Colors.grey),
+                        labelStyle:TextStyle(fontSize: 23),
+                        labelText: "Nom Produits",
+                        hintText: "Nom du produit",
+                        border: OutlineInputBorder(),
                       ),
-                    onPressed:(){
-                         if(_formKey.currentState!.validate()) {
-                           final clientName = clientNameController.text;
-                           final produitName = produitNameController.text;
-                           FocusScope.of(context).requestFocus(FocusNode());
-                           //ajout dans la base de donnes
-                           FirebaseFirestore.instance.collection('prets').add({
-                           'nom': clientName,
-                           'produit': produitName,
-                           'date': selectedDate,
-                           'etat': etatController
-                           });
-                         }
-                         clientNameController.clear();
-                         produitNameController.clear();
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
                       },
-
-                    child: Text("Ajouter"),
+                      controller: produitNameController,
+                    ),
                   ),
                 ),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 20, left: 10),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        hintStyle: TextStyle(color: Colors.grey),
+                        labelStyle:TextStyle(fontSize: 23),
+                        labelText: "Prix",
+                        hintText: "Prix du produit",
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      controller: prixController,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 20, left: 10),
+                        child:
+                      ElevatedButton(
+                          style: const ButtonStyle(
+                            backgroundColor:MaterialStatePropertyAll(Colors.deepPurpleAccent),
+                          ),
+                          onPressed:(){
+                            },
+                          child: Container(child: Icon(Icons.add,color: Colors.white,),)
+                      ),
+                    )
+                )
               ],
+            ),
+            Center(
+              child: Row(
+                children: [
+                  SizedBox(
+                   //width: double.infinity,
+                    child: ElevatedButton(
+                      style: const ButtonStyle(
+                         // backgroundColor:MaterialStatePropertyAll(Colors.blue)
+                        ),
+                      onPressed:(){
+                           if(_formKey.currentState!.validate()) {
+                             final clientName = clientNameController.text;
+                             final produitName = produitNameController.text;
+                             final prix = int.parse(prixController.text);
+                             FocusScope.of(context).requestFocus(FocusNode());
+                             //ajout dans la base de donnes
+                             FirebaseFirestore.instance.collection('prets').add({
+                             'nom': clientName,
+                             'produit': produitName,
+                             'date': selectedDate,
+                             'prix': prix,
+                             'etat': etatController
+                             });
+                           }
+                           clientNameController.clear();
+                           produitNameController.clear();
+                           prixController.clear();
+                        },
+
+                      child: Text("Ajouter"),
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),

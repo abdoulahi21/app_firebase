@@ -39,12 +39,13 @@ class _PretsEncoursState extends State<PretsEncours> {
                       final pret=prets[index];
                       final nom=pret['nom'];
                       final produit=pret['produit'];
+                      final prix=pret['prix'];
                       final Timestamp timestamp =pret['date'];
                       final date=DateFormat.yMd().add_jm().format(timestamp.toDate());
                      return  Card(
                        child:  ListTile(
                          title: Text('$nom , $date'),
-                         subtitle: Text('$produit'),
+                         subtitle: Text('$produit, $prix Fcfa'),
                          trailing: Icon(Icons.edit),
                        ),
                      );

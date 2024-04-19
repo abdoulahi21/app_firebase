@@ -16,7 +16,6 @@ class _ListesPretsState extends State<ListesPrets> {
       length:2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Liste des prets"),
           bottom: const TabBar(
             tabs: [
               Tab(
